@@ -12,6 +12,10 @@ public class ContaCorrente extends Conta {
         this.limite = limite;
     }
 
+    public void setLimite(double limite) {
+        this.limite = limite;
+    }
+
     @Override
     public boolean debitar(double montante) {
         if (montante <= saldo) {
