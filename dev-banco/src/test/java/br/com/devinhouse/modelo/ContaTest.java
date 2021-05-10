@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ContaTest {
 
     Conta conta;
+    ContaCorrente contaCorrente;
 
     @BeforeEach
     void setup(){
         conta = new ContaCorrente("114", 0, 0);
+        contaCorrente = new ContaCorrente("114", 0, 0);
     }
 
     @Test
@@ -60,13 +62,29 @@ class ContaTest {
         final double valorDeSaldoInicial = 100.00;
         final double valorDeDebito = 50.00;
 
-        conta.saldo = valorDeSaldoInicial;
+        contaCorrente.saldo = valorDeSaldoInicial;
 
-        final double expected = conta.getSaldo() - valorDeDebito;
+        final double expected = contaCorrente.getSaldo() - valorDeDebito;
 
-        conta.debitar(valorDeDebito);
+        contaCorrente.debitar(valorDeDebito);
 
-        final double actual = conta.getSaldo();
+        final double actual = contaCorrente.getSaldo();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void Deve_Testar_Debito_Com_Saldo_Inicial_Igual_A_0_E_Limite_Maior_Do_Que_0(){
+        final double valorDeLimiteInicial = 100.00;
+        final double valorDeDebito = 50.00;
+
+        contaCorrente.setLimite(valorDeLimiteInicial);
+
+        final double expected = contaCorrente.getLimite() - valorDeDebito;
+
+        contaCorrente.debitar(valorDeDebito);
+
+        final double actual = contaCorrente.getLimite();
 
         assertEquals(expected, actual);
     }
