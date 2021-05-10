@@ -1,6 +1,7 @@
 package br.com.devinhouse.modelo;
 
 import br.com.devinhouse.exception.DepositoInvalidoException;
+import br.com.devinhouse.exception.SaldoInsuficienteException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -87,6 +88,14 @@ class ContaTest {
         final double actual = contaCorrente.getLimite();
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void Deve_Testar_Debito_Com_Saldo_E_Limite_Iguais_A_0(){
+
+        final double valorDeDebito = 50.00;
+
+        assertThrows(SaldoInsuficienteException.class, () -> contaCorrente.debitar(valorDeDebito));
     }
 
 }
