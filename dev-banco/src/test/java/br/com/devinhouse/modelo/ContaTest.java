@@ -31,4 +31,16 @@ class ContaTest {
 
         assertTrue(atual == resultado);
     }
+
+    @Test
+    void Deve_Testar_Deposito_Valido_Com_Saldo_Inicial_0(){
+
+        double valorDeDeposito = 100.00;
+        boolean atual = conta.depositar(valorDeDeposito);
+
+        double saldoAtual = conta.getSaldo();
+
+        assertTrue(atual);
+        assertEquals(saldoAtual, valorDeDeposito);
+    }
 }
