@@ -1,5 +1,6 @@
 package br.com.devinhouse.modelo;
 
+import br.com.devinhouse.exception.DepositoInvalidoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,4 +44,15 @@ class ContaTest {
         assertTrue(atual);
         assertEquals(saldoAtual, valorDeDeposito);
     }
+
+    @Test
+    void Deve_Testar_Deposito_Invalido(){
+
+        final double valorDeDeposito = -100.00;
+
+        assertThrows(DepositoInvalidoException.class, () ->
+                conta.depositar(valorDeDeposito)
+        );
+    }
+
 }
