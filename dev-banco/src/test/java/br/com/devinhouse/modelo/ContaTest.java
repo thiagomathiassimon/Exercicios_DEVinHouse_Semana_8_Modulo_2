@@ -17,31 +17,31 @@ class ContaTest {
 
     @Test
     void Deve_Testar_Se_Saldo_Da_Conta_Igual_A_0(){
-        double atual = conta.getSaldo();
+        double actual = conta.getSaldo();
 
-        double resultado = 0.0;
+        double expected = 0.0;
 
-        assertEquals(atual, resultado);
+        assertEquals(actual, expected);
     }
 
     @Test
     void Deve_Testar_Se_Saldo_Da_Conta_Igual_A_0_Com_Assert_True(){
-        double atual = conta.getSaldo();
+        double actual = conta.getSaldo();
 
-        double resultado = 0.0;
+        double expected = 0.0;
 
-        assertTrue(atual == resultado);
+        assertTrue(actual == expected);
     }
 
     @Test
     void Deve_Testar_Deposito_Valido_Com_Saldo_Inicial_0(){
 
         double valorDeDeposito = 100.00;
-        boolean atual = conta.depositar(valorDeDeposito);
+        boolean actual = conta.depositar(valorDeDeposito);
 
         double saldoAtual = conta.getSaldo();
 
-        assertTrue(atual);
+        assertTrue(actual);
         assertEquals(saldoAtual, valorDeDeposito);
     }
 
@@ -53,6 +53,22 @@ class ContaTest {
         assertThrows(DepositoInvalidoException.class, () ->
                 conta.depositar(valorDeDeposito)
         );
+    }
+
+    @Test
+    void Deve_Testar_Debito_Com_Saldo_Inicial_Maior_Que_0(){
+        final double valorDeSaldoInicial = 100.00;
+        final double valorDeDebito = 50.00;
+
+        conta.saldo = valorDeSaldoInicial;
+
+        final double expected = conta.getSaldo() - valorDeDebito;
+
+        conta.debitar(valorDeDebito);
+
+        final double actual = conta.getSaldo();
+
+        assertEquals(expected, actual);
     }
 
 }
