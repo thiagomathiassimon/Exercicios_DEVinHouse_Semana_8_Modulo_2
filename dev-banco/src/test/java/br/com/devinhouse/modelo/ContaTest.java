@@ -2,9 +2,12 @@ package br.com.devinhouse.modelo;
 
 import br.com.devinhouse.exception.DepositoInvalidoException;
 import br.com.devinhouse.exception.SaldoInsuficienteException;
+import jdk.jfr.SettingDefinition;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperties;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -112,6 +115,12 @@ class ContaTest {
         conta.depositar(valorDeDeposito);
 
         assertEquals(valorDeDeposito, valorFinalEsperado);
+    }
+
+    @Test
+    @EnabledIfSystemProperties(@EnabledIfSystemProperty(named = "ambiente", matches = "dev", disabledReason = "Propriendade ambiente ausente"))
+    void Deve_Executar_Apenas_Se_Poussuir_A_Propriedade_Ambiente_Definida_Como_Dev(){
+        assertEquals(1, 1);
     }
 
 }
