@@ -5,6 +5,8 @@ import br.com.devinhouse.exception.SaldoInsuficienteException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -100,6 +102,16 @@ class ContaTest {
         final double valorDeDebito = 50.00;
 
         assertThrows(SaldoInsuficienteException.class, () -> contaCorrente.debitar(valorDeDebito));
+    }
+
+    @ParameterizedTest(name = "Teste parametrizado")
+    @CsvSource({"10,10","100,100"})
+    void Deve_Testar_Deposito_Com_O_Uso_De_Parametros(double valorDeDeposito, double valorFinalEsperado){
+        conta.saldo = 0;
+
+        conta.depositar(valorDeDeposito);
+
+        assertEquals(valorDeDeposito, valorFinalEsperado);
     }
 
 }
