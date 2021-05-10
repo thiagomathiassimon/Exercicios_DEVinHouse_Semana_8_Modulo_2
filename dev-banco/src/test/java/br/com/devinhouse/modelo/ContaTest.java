@@ -23,4 +23,12 @@ class ContaTest {
         assertEquals(atual, resultado);
     }
 
+    @Test
+    void Deve_Testar_Se_Saldo_Da_Conta_Igual_A_0_Com_Assert_True(){
+        double atual = conta.getSaldo();
+
+        double resultado = 0.0;
+
+        assertTrue(atual == resultado);
+    }
 }
