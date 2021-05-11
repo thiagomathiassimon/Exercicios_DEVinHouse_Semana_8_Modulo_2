@@ -21,7 +21,4 @@ class ServicoDeReservaTest {
 
         assertEquals(expected, actual);
     }
-
-    
-
 }
