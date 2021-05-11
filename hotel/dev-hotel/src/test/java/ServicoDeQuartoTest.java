@@ -1,12 +1,14 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,6 +34,14 @@ class ServicoDeQuartoTest {
         int expected = 2;
 
         assertEquals(expected, actual);
+    }
+
+
+    @Test
+    void Deve_Lancar_Uma_Excecao_Quando_Invocar_O_Metodo_buscarQuartoDisponivelPorId(){
+        when(servicoDeQuarto.buscarQuartoDisponivelPorId(any())).thenThrow(BusinessException.class);
+
+        assertThrows(BusinessException.class, () -> servicoDeQuarto.buscarQuartoDisponivelPorId(any()));
     }
 
 }
