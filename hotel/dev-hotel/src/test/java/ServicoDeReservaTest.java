@@ -50,4 +50,27 @@ class ServicoDeReservaTest {
                 () -> verify(enviadorDeEmail, times(1)).enviarConfirmacaoReserva(any())
         );
     }
+
+    @Test
+    void Deve_Testar_Se_O_Metodo_efetuarReserva_Funciona_Com_Input_De_Pagamento_Nao_Adiantado(){
+        ReservaInput input = new ReservaInput("114", of(2021, 5, 10),
+                of(2021,6,10), 3, false);
+
+        ServicoDeQuarto servicoDeQuarto = mock(ServicoDeQuarto.class);
+        ServicoDePagamentos servicoDePagamentos = mock(ServicoDePagamentos.class);
+        ReservaDAO reservaDAO = mock(ReservaDAO.class);
+        EnviadorDeEmail enviadorDeEmail = mock(EnviadorDeEmail.class);
+
+        ServicoDeReserva servicoDeReserva = new ServicoDeReserva(servicoDePagamentos,servicoDeQuarto, reservaDAO, enviadorDeEmail);
+
+        servicoDeReserva.efetuarReserva(input);
+
+        assertAll(
+                () -> verify(servicoDePagamentos, times(0)).pagar(any(), anyDouble()),
+                () -> verify(servicoDeQuarto, times(1)).buscarQuartoDisponivelPorId(any()),
+                () -> verify(servicoDeQuarto, times(1)).reservarQuarto(any()),
+                () -> verify(reservaDAO, times(1)).salvar(any()),
+                () -> verify(enviadorDeEmail, times(1)).enviarConfirmacaoReserva(any())
+        );
+    }
 }
