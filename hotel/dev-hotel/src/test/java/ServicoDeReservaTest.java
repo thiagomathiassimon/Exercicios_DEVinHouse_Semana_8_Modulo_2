@@ -38,6 +38,8 @@ class ServicoDeReservaTest {
         ReservaDAO reservaDAO = mock(ReservaDAO.class);
         EnviadorDeEmail enviadorDeEmail = mock(EnviadorDeEmail.class);
 
+        ServicoDeReserva servicoDeReserva = new ServicoDeReserva(servicoDePagamentos,servicoDeQuarto, reservaDAO, enviadorDeEmail);
+
         servicoDeReserva.efetuarReserva(input);
 
         assertAll(
