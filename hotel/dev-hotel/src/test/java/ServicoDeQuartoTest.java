@@ -44,4 +44,11 @@ class ServicoDeQuartoTest {
         assertThrows(BusinessException.class, () -> servicoDeQuarto.buscarQuartoDisponivelPorId(any()));
     }
 
+    @Test
+    void Deve_Lancar_Uma_Excecao_Independe_Quando_Invocar_O_Metodo_buscarQuartoDisponivelPorId(){
+        when(servicoDeQuarto.buscarQuartoDisponivelPorId(any())).thenThrow(UnsupportedOperationException.class);
+
+        assertThrows(UnsupportedOperationException.class, () -> servicoDeQuarto.buscarQuartoDisponivelPorId(any()));
+    }
+
 }
